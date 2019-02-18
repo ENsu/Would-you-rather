@@ -4,24 +4,37 @@ import { connect } from 'react-redux'
 import Nav from './Nav'
 import Login from './Login'
 import QuestionContainer from './QuestionContainer'
-import QuestionDetail from './QuestionDetail'
-import AddQuestion from './AddQuestion'
+import QuestionDetailUnans from './QuestionDetailUnans'
+import QuestionDetailAns from './QuestionDetailAns'
+import AskQuestion from './AskQuestion'
 import LeaderBoard from './LeaderBoard'
+import "../utils/sb-admin-2.css"
 
 
 
 class App extends Component {
+
+
   render() {
+    const { currentUser } = this.props
     return (
       <Router>
         <div>
-          <Nav />
-          <div>
-              <Route path='/login' component={Login} />
-              <Route path='/home' component={QuestionContainer} />
-              <Route path='/question/:id' component={QuestionDetail} />
-              <Route path='/addnew' component={AddQuestion} />
-              <Route path='/leaderboard' component={LeaderBoard} />
+          {currentUser === null ? null : <Nav />}
+          <div className="container">
+            <div className="col-lg-6 mx-auto">
+              {currentUser === null
+                ? <Login />
+                :
+              <div> 
+                <Route path='/' component={QuestionContainer} />
+                <Route path='/question_un/:id' component={QuestionDetailUnans} />
+                <Route path='/question_ans/:id' component={QuestionDetailAns} />
+                <Route path='/asknew' component={AskQuestion} />
+                <Route path='/leaderboard' component={LeaderBoard} />
+              </div>
+              }
+            </div>
           </div>
         </div>    
       </Router>
@@ -29,8 +42,9 @@ class App extends Component {
   }
 }
 
-function mapStatetoProps ({ }) {
+function mapStatetoProps ({currentUser}) {
     return {
+      currentUser: currentUser
     }
 }
 

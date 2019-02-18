@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-// import reducer1 from ‘./reducer1'
+import users from './users'
+import currentUser from './currentUser'
 // import reducer2 from ‘./reducer2'
 
 export default combineReducers({
-//    reducer1,
+    users,
+    currentUser
 //    reducer2
 })

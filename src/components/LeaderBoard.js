@@ -5,9 +5,19 @@ import Person from './Person'
 class LeaderBoard extends Component {
     render() {
        return (<div>
-       			LeaderBoard:
-       			with nested <Person />s
-       		   </div>)
+            <Person
+            	name="player1"
+            	avatar_url="/imgs/avatar1.png"
+            	question_cnt="7"
+            	ask_cnt="3" 
+            />
+            <Person
+            	name="player2"
+            	avatar_url="/imgs/avatar2.png"
+            	question_cnt="5"
+            	ask_cnt="3" 
+            />
+       		</div>)
     }
 }
 
