@@ -14,7 +14,6 @@ import "../utils/sb-admin-2.css"
 
 class App extends Component {
 
-
   render() {
     const { currentUser } = this.props
     return (
@@ -27,7 +26,7 @@ class App extends Component {
                 ? <Login />
                 :
               <div> 
-                <Route path='/' component={QuestionContainer} />
+                <Route path='/' exact component={QuestionContainer} />
                 <Route path='/question_un/:id' component={QuestionDetailUnans} />
                 <Route path='/question_ans/:id' component={QuestionDetailAns} />
                 <Route path='/asknew' component={AskQuestion} />

@@ -59,9 +59,11 @@ class Login extends Component {
 	              </div>
 	              <form className="user">
 	                <div className="dropdown mb-4" onClick={this.dropdownToggle}>
-	                  <button className="btn btn-primary btn-user dropdown-toggle btn-block dropdown-" type="button" id="dropdownMenuButton"
+	                  <button className="btn btn-primary btn-user dropdown-toggle btn-block" type="button" id="dropdownMenuButton"
 	                   >
-	                    Pick a player
+	                    { this.state.pick_user_id === null
+	                    	? "Pick a player"
+	                    	:users[this.state.pick_user_id]['name']}
 	                  </button>
 	                  <div className={`dropdown-menu animated--fade-in${this.state.dropdown_toggle? " show":""}`}>
 	                    {Object.keys(users).map((key) =>

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setCurrentUser } from '../actions/currentUser'
+import { NavLink } from 'react-router-dom'
 
 
 class Nav extends Component {
+
 	handleLogout = (e) => {
 		e.preventDefault()
+		console.log("logout happened")
 		this.props.dispatch(setCurrentUser(null))
 	}
 
@@ -17,23 +20,23 @@ class Nav extends Component {
         <nav className="navbar navbar-expand bg-white topbar mb-4 static-top shadow">
           <ul className="navbar-nav">
 
-		      <a className="navbar-brand d-flex align-items-center justify-content-center" href="home">
+		      <NavLink className="navbar-brand d-flex align-items-center justify-content-center" to="/" exact>
 		        <div className="navbar-brand-text mx-3">Would you rather</div>
-		      </a>
+		      </NavLink>
 
 		      <div className="topbar-divider d-none d-sm-block"></div>
 
 		      <li className="nav-item active">
-		        <a className="nav-link" href="home">
-		          <span>Find Questions</span></a>
+		        <NavLink className="nav-link" to="/" exact>
+		          <span>Find Questions</span></NavLink>
 		      </li>
 		      <li className="nav-item active">
-		        <a className="nav-link" href="asknew">
-		          <span>Ask Questions</span></a>
+		        <NavLink className="nav-link" to="/asknew">
+		          <span>Ask Questions</span></NavLink>
 		      </li>
 		      <li className="nav-item active">
-		        <a className="nav-link" href="leaderboard">
-		          <span>Leader Board</span></a>
+		        <NavLink className="nav-link" to="/leaderboard">
+		          <span>Leader Board</span></NavLink>
 		      </li>
 		  </ul>
 
@@ -49,7 +52,7 @@ class Nav extends Component {
             </li>
 
 		    <li className="nav-item active">
-		      <a className="nav-link" href="#" onClick={this.handleLogout}>
+		      <a className="nav-link" href="/logout" onClick={this.handleLogout}>
 		        <span>Log Out</span></a>
 		    </li>
 
