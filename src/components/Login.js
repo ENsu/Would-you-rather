@@ -30,11 +30,6 @@ class Login extends Component {
 		this.props.dispatch(setCurrentUser(this.state.pick_user_id))
 	}
 
-	componentDidMount() {
-		this.props.dispatch(handleGetUsers())
-	}
-
-
     render() {
 
        const { users } = this.props

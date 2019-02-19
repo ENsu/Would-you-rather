@@ -10,9 +10,16 @@ import AskQuestion from './AskQuestion'
 import LeaderBoard from './LeaderBoard'
 import "../utils/sb-admin-2.css"
 
+import { handleGetUsers } from '../actions/users'
+import { handleGetQuestions } from '../actions/questions'
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(handleGetUsers())
+    this.props.dispatch(handleGetQuestions())
+  }
 
   render() {
     const { currentUser } = this.props
