@@ -1,11 +1,21 @@
 import { _getQuestions } from '../utils/_DATA'
 
 export const GET_QUESTIONS = 'GET_QUESTIONS'
+export const VOTE_QUESTION = 'VOTE_QUESTION'
 
 export function getQuestions (questions) {
     return {
         type: GET_QUESTIONS,
-        questions: questions
+        questions
+    }
+}
+
+export function voteQuestion (currentUser, qid, answer) {
+    return {
+        type: VOTE_QUESTION,
+        currentUser,
+        qid,
+        answer
     }
 }
 

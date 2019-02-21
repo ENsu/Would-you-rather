@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import Nav from './Nav'
 import Login from './Login'
 import QuestionContainer from './QuestionContainer'
-import QuestionDetailUnans from './QuestionDetailUnans'
-import QuestionDetailAns from './QuestionDetailAns'
+import QuestionDetail from './QuestionDetail'
 import AskQuestion from './AskQuestion'
 import LeaderBoard from './LeaderBoard'
 import "../utils/sb-admin-2.css"
@@ -34,8 +33,7 @@ class App extends Component {
                 :
               <div> 
                 <Route path='/' exact component={QuestionContainer} />
-                <Route path='/question_un/:id' component={QuestionDetailUnans} />
-                <Route path='/question_ans/:id' component={QuestionDetailAns} />
+                <Route path='/question/:id' component={QuestionDetail} />
                 <Route path='/asknew' component={AskQuestion} />
                 <Route path='/leaderboard' component={LeaderBoard} />
               </div>
