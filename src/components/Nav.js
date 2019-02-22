@@ -47,13 +47,13 @@ class Nav extends Component {
             <li className="nav-item dropdown no-arrow">
               <div className="nav-link">
                 <span className="mr-2 d-none d-lg-inline">{ Name }</span>
-                <img className="img-profile rounded-circle" src={ AvatarUrl }/>
+                <img className="img-profile rounded-circle" src={ AvatarUrl } alt={ Name }/>
               </div>
             </li>
 
 		    <li className="nav-item active">
-		      <a className="nav-link" href="/logout" onClick={this.handleLogout}>
-		        <span>Log Out</span></a>
+		      <button className="nav-link btn btn-link" onClick={this.handleLogout}>
+		        <span>Log Out</span></button>
 		    </li>
 
           </ul>
@@ -64,7 +64,7 @@ class Nav extends Component {
     }
 }
 
-function mapStateToProps ({users, currentUser}, {}) {
+function mapStateToProps ({users, currentUser}) {
     return { 
     	Name:users[currentUser]['name'],
     	AvatarUrl: users[currentUser]['avatarURL']

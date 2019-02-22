@@ -3,27 +3,29 @@ import { connect } from 'react-redux'
 
 class Person extends Component {
     render() {
+       const { user, rank } = this.props
+
        return (
-            <div class="card mb-4">
-              <div class="card-header">
-                Rank 1:
+            <div className="card mb-4">
+              <div className="card-header">
+                Rank { rank }:
               </div>
-              <div class="card-body row">
-                <div class="col-lg-3">
-                  <img class="img-profile rounded-circle" src={this.props.avatar_url} alt=""
+              <div className="card-body row">
+                <div className="col-lg-3">
+                  <img className="img-profile rounded-circle" src={user.avatarURL} alt=""
                   style={{width:"100px"}} />
                 </div>
-                <div class="col-lg-9">
-                  <h4>{this.props.name}</h4>
+                <div className="col-lg-9">
+                  <h4>{user.name}</h4>
                   <div>
-                    <span class="h6 font-weight-bold">Answered {this.props.question_cnt} Questions</span>
+                    <span className="h6 font-weight-bold">Answered {user.q_cnt} Questions</span>
                   </div>
                   <div>
-                      <span class="h6 font-weight-bold">Ask {this.props.ask_cnt} Questions</span>
+                      <span className="h6 font-weight-bold">Ask {user.ans_cnt} Questions</span>
                   </div>
                   <hr />
                   <div>
-                      <span class="h6 font-weight-bold">Get {parseInt(this.props.question_cnt) + parseInt(this.props.ask_cnt)} Scores</span>
+                      <span className="h6 font-weight-bold">Get {parseInt(user.q_cnt) + parseInt(user.ans_cnt)} Scores</span>
                   </div>
                 </div>
               </div>
@@ -31,8 +33,15 @@ class Person extends Component {
        )
     }
 }
-function mapStateToProps ({}, {}) {
+
+function mapStateToProps ({users}, { id, rank }) {
     return { 
+      user: {...users[id],
+              q_cnt:users[id]['questions'].length,
+              ans_cnt:Object.keys(users[id]['answers']).length
+          },
+      rank
     }
 }
+
 export default connect(mapStateToProps)(Person)

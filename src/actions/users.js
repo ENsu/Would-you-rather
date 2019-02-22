@@ -2,6 +2,7 @@ import { _getUsers } from '../utils/_DATA'
 
 export const GET_USERS = 'GET_USERS'
 export const USER_VOTE = 'USER_VOTE'
+export const USER_ASK = 'USER_ASK'
 
 export function getUsers (users) {
     return {
@@ -10,13 +11,21 @@ export function getUsers (users) {
     }
 }
 
-export function userVote (currentUser, qid, answer) {
+export function userVote (authedUser, qid, answer) {
     return {
         type: USER_VOTE,
-        currentUser,
+        authedUser,
         qid,
         answer
     }  
+}
+
+export function userAsk (authedUser, qid) {
+    return {
+        type: USER_ASK,
+        qid,
+        authedUser
+    }
 }
 
 // add a handler to to asynchronous API calls during the dispatch

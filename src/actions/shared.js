@@ -1,7 +1,7 @@
-import { _saveQuestionAnswer } from '../utils/_DATA'
+import { _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA'
 import { showLoading, hideLoading } from 'react-redux-loading'
-import { userVote } from './users'
-import { voteQuestion } from './questions'
+import { userVote, userAsk } from './users'
+import { voteQuestion, askQuestion } from './questions'
 
 export function handleUserVoteQuestion(authedUser, qid, answer) {
 	return (dispatch) => {
@@ -13,4 +13,18 @@ export function handleUserVoteQuestion(authedUser, qid, answer) {
 				dispatch(hideLoading())
 			})
 	}
+}
+
+export function handleUserAskQuestion (optionOneText, optionTwoText) {
+    return (dispatch, getState) => {
+        const { currentUser } = getState()
+        const author = currentUser
+        const question = { author, optionOneText, optionTwoText }
+
+        return _saveQuestion(question)
+            .then((formattedQuestion) => {
+                dispatch(askQuestion(formattedQuestion))
+                dispatch(userAsk(currentUser, formattedQuestion.id))
+            })
+    }
 }

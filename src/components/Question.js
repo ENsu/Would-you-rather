@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class Question extends Component {
     render() {
@@ -15,7 +15,7 @@ class Question extends Component {
           <div className="card-body row">
             <div className="col-lg-3">
               <img className="img-profile rounded-circle" src={user.avatarURL}
-                   style={{width:'100px'}} />
+                   style={{width:'100px'}} alt={user.name} />
             </div>
             <div className="col-lg-9">
               <h4>Would you rather</h4>

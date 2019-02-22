@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleGetUsers } from '../actions/users'
 import { setCurrentUser } from '../actions/currentUser'
 
 
@@ -44,7 +43,7 @@ class Login extends Component {
           <div className="card-body p-0">
             <div className="row">
               <div className="col-lg-12 d-none d-lg-block">
-                <img src={avatar_url} style={{width:'100%'}} />
+                <img src={avatar_url} style={{width:'100%'}} alt="user_avataar"/>
               </div>
             </div>
             <div className="row">
@@ -62,16 +61,16 @@ class Login extends Component {
 	                  </button>
 	                  <div className={`dropdown-menu animated--fade-in${this.state.dropdown_toggle? " show":""}`}>
 	                    {Object.keys(users).map((key) =>
-	                    	(<a key={key} className="dropdown-item" href="#" 
+	                    	(<button key={key} className="dropdown-item"
 	                    		onClick={(event) => (this.handlePickUser(event, key))}
-	                    		>{users[key]['name']}</a>
+	                    		>{users[key]['name']}</button>
 	                    ))}
 	                  </div>
 	                </div>
-	                <a href="index.html" className="btn btn-primary btn-user btn-block"
+	                <button className="btn btn-primary btn-user btn-block"
 	                onClick={this.handleLogin}>
 	                  Login
-	                </a>
+	                </button>
 	              </form>
 	            </div>
             </div>
@@ -82,7 +81,7 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps ({users}, {}) {
+function mapStateToProps ({users}) {
 
     return { 
     	users: users,

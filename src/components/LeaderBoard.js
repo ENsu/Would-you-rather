@@ -4,25 +4,22 @@ import Person from './Person'
 
 class LeaderBoard extends Component {
     render() {
+       const { ranked_users_id } = this.props
+
        return (<div>
-            <Person
-            	name="player1"
-            	avatar_url="/imgs/avatar1.png"
-            	question_cnt="7"
-            	ask_cnt="3" 
-            />
-            <Person
-            	name="player2"
-            	avatar_url="/imgs/avatar2.png"
-            	question_cnt="5"
-            	ask_cnt="3" 
-            />
-       		</div>)
+            {
+                ranked_users_id.map((id, index) => <Person id={id} rank={index+1} key={id} />)
+            }
+            </div>)
     }
 }
 
-function mapStateToProps ({}, {}) {
+function mapStateToProps ({users}) {
+
     return { 
+        ranked_users_id: Object.keys(users).map((k) => users[k]).sort((a,b) => (
+            Object.keys(b.answers).length + b.questions.length) - (Object.keys(a.answers).length + a.questions.length)
+        ).map((p) => p.id)
     }
 }
 

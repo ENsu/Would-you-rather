@@ -17,50 +17,50 @@ class QuestionDetail extends Component {
 
        return (
 
-        <div class="card mb-4">
-          <div class="card-header">
+        <div className="card mb-4">
+          <div className="card-header">
             { author.name } Asks:
           </div>
-          <div class="card-body row">
-            <div class="col-lg-3">
-              <img class="img-profile rounded-circle" src={author.avatarURL}
-              style={{width:"100px"}}/>
+          <div className="card-body row">
+            <div className="col-lg-3">
+              <img className="img-profile rounded-circle" src={author.avatarURL}
+              style={{width:"100px"}} alt={author.name} />
             </div>
             
             {user_is_ans
-            ?<div class="col-lg-9">
+            ?<div className="col-lg-9">
               <h4>Result</h4>
               <div>
-                <span class="h4 font-weight-bold">{ question.optionOne.text }</span>
+                <span className="h4 font-weight-bold">{ question.optionOne.text }</span>
                 {(current_user['answers'][question.id]==="optionOne") && <span>(You vote this!)</span>}
                 <div>{question.optionOneRate}</div>
-                <div class="progress mb-4">
-                  <div class="progress-bar" role="progressbar" style={{width: question.optionOneRate, ariavaluemin:"0", ariavaluemax:"100"}}></div>
+                <div className="progress mb-4">
+                  <div className="progress-bar" role="progressbar" style={{width: question.optionOneRate, ariavaluemin:"0", ariavaluemax:"100"}}></div>
                 </div>
               </div>
               <div>
-                  <span class="h4 font-weight-bold">{ question.optionTwo.text }</span>
+                  <span className="h4 font-weight-bold">{ question.optionTwo.text }</span>
                   {(current_user['answers'][question.id]==="optionTwo") && <span>(You vote this!)</span>}
                   <div>{question.optionTwoRate}</div>
-                  <div class="progress mb-4">
-                  <div class="progress-bar" role="progressbar" style={{width: question.optionTwoRate, ariavaluemin:"0", ariavaluemax:"100"}}></div>
+                  <div className="progress mb-4">
+                  <div className="progress-bar" role="progressbar" style={{width: question.optionTwoRate, ariavaluemin:"0", ariavaluemax:"100"}}></div>
                 </div>
               </div>
             </div>
-            :<div class="col-lg-9">
+            :<div className="col-lg-9">
              <h4>Would you rather</h4>
               <div>
-                    <a href="#" class="btn btn-success btn-circle btn-small" onClick={(event) => this.handleVote(event, "optionOne")}>
+                    <button className="btn btn-success btn-circle btn-small" onClick={(event) => this.handleVote(event, "optionOne")}>
                       <FontAwesomeIcon icon={faCheck} />
-                    </a>
-                    <span class="h4 font-weight-bold">{ question.optionOne.text }</span>
+                    </button>
+                    <span className="h4 font-weight-bold">{ question.optionOne.text }</span>
               </div>
-              <div class="my-2">Or....</div>
+              <div className="my-2">Or....</div>
               <div>
-                  <a href="#" class="btn btn-success btn-circle" onClick={(event) => this.handleVote(event, "optionTwo")}>
+                  <button className="btn btn-success btn-circle" onClick={(event) => this.handleVote(event, "optionTwo")}>
                     <FontAwesomeIcon icon={faCheck} />
-                  </a>
-                  <span class="h4 font-weight-bold">{ question.optionTwo.text }</span>
+                  </button>
+                  <span className="h4 font-weight-bold">{ question.optionTwo.text }</span>
               </div>
             </div>
             }
@@ -84,7 +84,7 @@ function mapStateToProps ({ questions, users, currentUser }, props) {
                   optionTwoRate: `${(optionTwoScore / (optionOneScore + optionTwoScore) * 100).toFixed(1)}%`},
       author: users[questions[id]['author']],
       current_user: users[currentUser],
-      user_is_ans: Object.keys(users[currentUser]['answers']).filter((key) => key == id).length > 0
+      user_is_ans: Object.keys(users[currentUser]['answers']).filter((key) => key === id).length > 0
     }
 }
 

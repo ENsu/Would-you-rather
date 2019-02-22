@@ -2,6 +2,7 @@ import { _getQuestions } from '../utils/_DATA'
 
 export const GET_QUESTIONS = 'GET_QUESTIONS'
 export const VOTE_QUESTION = 'VOTE_QUESTION'
+export const ASK_QUESTION = 'ASK_QUESTION'
 
 export function getQuestions (questions) {
     return {
@@ -19,6 +20,14 @@ export function voteQuestion (currentUser, qid, answer) {
     }
 }
 
+export function askQuestion (question) {
+
+    return {
+        type: ASK_QUESTION,
+        question
+    }
+}
+
 // add a handler to to asynchronous API calls during the dispatch
 // require redux-thunk middleware
 export function handleGetQuestions () {
@@ -29,3 +38,4 @@ export function handleGetQuestions () {
             })
     }
 }
+

@@ -4,7 +4,7 @@ import Question from './Question'
 
 class QuestionContainer extends Component {
 	state = {
-		list_ans_q: true
+		list_ans_q: false
 	}
 
 	handleSwitch = (e, list_ans_q) => {
@@ -15,7 +15,6 @@ class QuestionContainer extends Component {
 	}
 
     render() {
-    	const { users } = this.props
     	const { list_ans_q } = this.state
        	const questions_id_showed = list_ans_q
        			? this.props.questions_id_ans
@@ -24,14 +23,14 @@ class QuestionContainer extends Component {
        return (<div>
 	       		<div className="row">
 	              <div className="mx-4">
-	                <a href="#" onClick={(event) => this.handleSwitch(event, true)}>
+	                <button className="btn btn-link" onClick={(event) => this.handleSwitch(event, true)}>
 	                  <h5 style={{"textDecoration": list_ans_q ? "underline" : ""}}> Answered Question </h5>
-	                </a>
+	                </button>
 	              </div>
 	              <div className="mx-4">
-	                <a href="#" onClick={(event) => this.handleSwitch(event, false)}>
+	                <button className="btn btn-link" onClick={(event) => this.handleSwitch(event, false)}>
 	                  <h5 style={{"textDecoration": list_ans_q ? "" : "underline"}}> Unanswered Question </h5>
-	                </a>
+	                </button>
 	              </div>
 	            </div>
 	            	{ questions_id_showed.map((id) => (<Question id={id} key={id} />))}
@@ -39,7 +38,7 @@ class QuestionContainer extends Component {
     }
 }
 
-function mapStateToProps ({questions, users, currentUser}, {}) {
+function mapStateToProps ({questions, users, currentUser}) {
 	let questions_ans = []
 	let questions_unans = []
 	for (let key in questions){
@@ -52,8 +51,7 @@ function mapStateToProps ({questions, users, currentUser}, {}) {
 
     return { 
     	questions_id_ans: questions_ans.sort((a,b) => b.timestamp - a.timestamp).map((q) => q.id),
-    	questions_id_unans: questions_unans.sort((a,b) => b.timestamp - a.timestamp).map((q) => q.id),
-    	users: users
+    	questions_id_unans: questions_unans.sort((a,b) => b.timestamp - a.timestamp).map((q) => q.id)
     }
 }
 
