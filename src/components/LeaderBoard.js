@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Person from './Person'
 
-class LeaderBoard extends Component {
-    render() {
-       const { rankedUsersId } = this.props
+const LeaderBoard = (props) => {
+   const { rankedUsersId } = props
 
-       return (<div>
-            {
-                rankedUsersId.map((id, index) => <Person id={id} rank={index+1} key={id} />)
-            }
-            </div>)
-    }
+   return (<div>
+        {
+            rankedUsersId.map((id, index) => <Person id={id} rank={index+1} key={id} />)
+        }
+        </div>)
 }
 
 function mapStateToProps ({users}) {

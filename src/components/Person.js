@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
-class Person extends Component {
-    render() {
-       const { user, rank } = this.props
+const Person = (props) => {
+       const { user, rank } = props
 
        return (
             <div className="card mb-4">
@@ -18,10 +17,10 @@ class Person extends Component {
                 <div className="col-lg-9">
                   <h4>{user.name}</h4>
                   <div>
-                    <span className="h6 font-weight-bold">Answered {user.q_cnt} Questions</span>
+                    <span className="h6 font-weight-bold">Answered {user.ans_cnt} Questions</span>
                   </div>
                   <div>
-                      <span className="h6 font-weight-bold">Ask {user.ans_cnt} Questions</span>
+                      <span className="h6 font-weight-bold">Ask {user.q_cnt} Questions</span>
                   </div>
                   <hr />
                   <div>
@@ -31,7 +30,6 @@ class Person extends Component {
               </div>
             </div>
        )
-    }
 }
 
 function mapStateToProps ({users}, { id, rank }) {

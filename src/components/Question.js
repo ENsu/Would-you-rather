@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-class Question extends Component {
-    render() {
+const Question = (props) => {
 
-      const { id, user } = this.props
-
+      const { id, user } = props
       return (
 			   <div className="card mb-4">
           <div className="card-header">
@@ -32,7 +30,6 @@ class Question extends Component {
 
     	)
     }
-}
 
 function mapStateToProps ({ questions, users }, {id}) {
 

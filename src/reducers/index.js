@@ -8,5 +8,4 @@ export default combineReducers({
     users,
     questions,
     authedUser
-//    reducer2
 })

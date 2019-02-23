@@ -37,7 +37,7 @@ class QuestionDetail extends Component {
               <div>
                 <span className="h4 font-weight-bold">{ question.optionOne.text }</span>
                 {(authedUser['answers'][question.id]==="optionOne") && <span>(You vote this!)</span>}
-                <div>{`${question.optionTwoRate}(${question.optionOneScore}/${question.totalScore})`}</div>
+                <div>{`${question.optionOneRate}(${question.optionOneScore}/${question.totalScore})`}</div>
                 <div className="progress mb-4">
                   <div className="progress-bar" role="progressbar" style={{width: question.optionOneRate, ariavaluemin:"0", ariavaluemax:"100"}}></div>
                 </div>
