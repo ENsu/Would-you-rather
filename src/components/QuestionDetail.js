@@ -8,12 +8,16 @@ class QuestionDetail extends Component {
 
     handleVote = (e, option) => {
       e.preventDefault()
-      const { question, current_user } = this.props
-      this.props.dispatch(handleUserVoteQuestion(current_user.id, question.id, option))
+      const { question, authedUser } = this.props
+      this.props.dispatch(handleUserVoteQuestion(authedUser.id, question.id, option))
     }
 
     render()  {
-       const { question, author, user_is_ans, current_user } = this.props
+       const { validId, question, author, userIsAns, authedUser } = this.props
+       
+       if (validId === false) {
+          return <div>PAGE 404</div>
+       }
 
        return (
 
@@ -27,21 +31,21 @@ class QuestionDetail extends Component {
               style={{width:"100px"}} alt={author.name} />
             </div>
             
-            {user_is_ans
+            {userIsAns
             ?<div className="col-lg-9">
               <h4>Result</h4>
               <div>
                 <span className="h4 font-weight-bold">{ question.optionOne.text }</span>
-                {(current_user['answers'][question.id]==="optionOne") && <span>(You vote this!)</span>}
-                <div>{question.optionOneRate}</div>
+                {(authedUser['answers'][question.id]==="optionOne") && <span>(You vote this!)</span>}
+                <div>{`${question.optionTwoRate}(${question.optionOneScore}/${question.totalScore})`}</div>
                 <div className="progress mb-4">
                   <div className="progress-bar" role="progressbar" style={{width: question.optionOneRate, ariavaluemin:"0", ariavaluemax:"100"}}></div>
                 </div>
               </div>
               <div>
                   <span className="h4 font-weight-bold">{ question.optionTwo.text }</span>
-                  {(current_user['answers'][question.id]==="optionTwo") && <span>(You vote this!)</span>}
-                  <div>{question.optionTwoRate}</div>
+                  {(authedUser['answers'][question.id]==="optionTwo") && <span>(You vote this!)</span>}
+                  <div>{`${question.optionTwoRate}(${question.optionTwoScore}/${question.totalScore})`}</div>
                   <div className="progress mb-4">
                   <div className="progress-bar" role="progressbar" style={{width: question.optionTwoRate, ariavaluemin:"0", ariavaluemax:"100"}}></div>
                 </div>
@@ -72,19 +76,25 @@ class QuestionDetail extends Component {
     }
 }
 
-function mapStateToProps ({ questions, users, currentUser }, props) {
+function mapStateToProps ({ questions, users, authedUser }, props) {
     const { id } = props.match.params
+    if (!(id in questions)) {
+      return { validId: false }
+    }
     let question = questions[id]
     let optionOneScore = question.optionOne.votes.length
     let optionTwoScore = question.optionTwo.votes.length
 
     return { 
-      question: {...question, 
+      validId: true,
+      question: {...question,
+                  optionOneScore: optionOneScore, optionTwoScore: optionTwoScore,
+                  totalScore: (optionOneScore + optionTwoScore),
                   optionOneRate: `${(optionOneScore / (optionOneScore + optionTwoScore) * 100).toFixed(1)}%`,
                   optionTwoRate: `${(optionTwoScore / (optionOneScore + optionTwoScore) * 100).toFixed(1)}%`},
       author: users[questions[id]['author']],
-      current_user: users[currentUser],
-      user_is_ans: Object.keys(users[currentUser]['answers']).filter((key) => key === id).length > 0
+      authedUser: users[authedUser],
+      userIsAns: Object.keys(users[authedUser]['answers']).filter((key) => key === id).length > 0
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setCurrentUser } from '../actions/currentUser'
+import { setAuthedUser } from '../actions/authedUser'
 import { NavLink } from 'react-router-dom'
 
 
@@ -9,7 +9,7 @@ class Nav extends Component {
 	handleLogout = (e) => {
 		e.preventDefault()
 		console.log("logout happened")
-		this.props.dispatch(setCurrentUser(null))
+		this.props.dispatch(setAuthedUser(null))
 	}
 
     render() {
@@ -64,10 +64,10 @@ class Nav extends Component {
     }
 }
 
-function mapStateToProps ({users, currentUser}) {
+function mapStateToProps ({users, authedUser}) {
     return { 
-    	Name:users[currentUser]['name'],
-    	AvatarUrl: users[currentUser]['avatarURL']
+    	Name:users[authedUser]['name'],
+    	AvatarUrl: users[authedUser]['avatarURL']
     }
 }
 

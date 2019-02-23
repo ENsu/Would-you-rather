@@ -16,9 +16,9 @@ class QuestionContainer extends Component {
 
     render() {
     	const { list_ans_q } = this.state
-       	const questions_id_showed = list_ans_q
-       			? this.props.questions_id_ans
-       			: this.props.questions_id_unans
+       	const questionsIdShowed = list_ans_q
+       			? this.props.questionsIdAns
+       			: this.props.questionsIdUnans
 
        return (<div>
 	       		<div className="row">
@@ -33,16 +33,16 @@ class QuestionContainer extends Component {
 	                </button>
 	              </div>
 	            </div>
-	            	{ questions_id_showed.map((id) => (<Question id={id} key={id} />))}
+	            	{ questionsIdShowed.map((id) => (<Question id={id} key={id} />))}
        		   </div>)
     }
 }
 
-function mapStateToProps ({questions, users, currentUser}) {
+function mapStateToProps ({questions, users, authedUser}) {
 	let questions_ans = []
 	let questions_unans = []
 	for (let key in questions){
-		if(Object.keys(users[currentUser]['answers']).includes(key)){
+		if(Object.keys(users[authedUser]['answers']).includes(key)){
 			questions_ans.push(questions[key])
 		} else {
 			questions_unans.push(questions[key])
@@ -50,8 +50,8 @@ function mapStateToProps ({questions, users, currentUser}) {
 	}
 
     return { 
-    	questions_id_ans: questions_ans.sort((a,b) => b.timestamp - a.timestamp).map((q) => q.id),
-    	questions_id_unans: questions_unans.sort((a,b) => b.timestamp - a.timestamp).map((q) => q.id)
+    	questionsIdAns: questions_ans.sort((a,b) => b.timestamp - a.timestamp).map((q) => q.id),
+    	questionsIdUnans: questions_unans.sort((a,b) => b.timestamp - a.timestamp).map((q) => q.id)
     }
 }
 

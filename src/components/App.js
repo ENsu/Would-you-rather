@@ -21,14 +21,14 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser } = this.props
+    const { authedUser } = this.props
     return (
       <Router>
         <div>
-          {currentUser === null ? null : <Nav />}
+          {authedUser === null ? null : <Nav />}
           <div className="container">
             <div className="col-lg-6 mx-auto">
-              {currentUser === null
+              {authedUser === null
                 ? <Login />
                 :
               <div> 
@@ -46,9 +46,9 @@ class App extends Component {
   }
 }
 
-function mapStatetoProps ({currentUser}) {
+function mapStatetoProps ({authedUser}) {
     return {
-      currentUser: currentUser
+      authedUser: authedUser
     }
 }
 

@@ -17,14 +17,14 @@ export function handleUserVoteQuestion(authedUser, qid, answer) {
 
 export function handleUserAskQuestion (optionOneText, optionTwoText) {
     return (dispatch, getState) => {
-        const { currentUser } = getState()
-        const author = currentUser
+        const { authedUser } = getState()
+        const author = authedUser
         const question = { author, optionOneText, optionTwoText }
 
         return _saveQuestion(question)
             .then((formattedQuestion) => {
                 dispatch(askQuestion(formattedQuestion))
-                dispatch(userAsk(currentUser, formattedQuestion.id))
+                dispatch(userAsk(authedUser, formattedQuestion.id))
             })
     }
 }

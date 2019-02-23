@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setCurrentUser } from '../actions/currentUser'
+import { setAuthedUser } from '../actions/authedUser'
 
 
 
@@ -26,7 +26,7 @@ class Login extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault()
-		this.props.dispatch(setCurrentUser(this.state.pick_user_id))
+		this.props.dispatch(setAuthedUser(this.state.pick_user_id))
 	}
 
     render() {
