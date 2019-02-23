@@ -31,7 +31,7 @@ class Nav extends Component {
 		          <span>Find Questions</span></NavLink>
 		      </li>
 		      <li className="nav-item active">
-		        <NavLink className="nav-link" to="/asknew">
+		        <NavLink className="nav-link" to="/add">
 		          <span>Ask Questions</span></NavLink>
 		      </li>
 		      <li className="nav-item active">
